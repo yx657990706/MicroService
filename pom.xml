@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--本工程坐标-->
+    <groupId>com.yx</groupId>
+    <artifactId>MicroService</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- 打包类型,默认为jar,含有子模块的模块自动被设置为pom -->
+    <packaging>pom</packaging>
+
+    <!-- 被聚合的子模块索引 -->
+    <modules>
+        <module>eureka-server</module>
+        <module>app-provider</module>
+        <module>app-consumer</module>
+        <module>api-gateway-server</module>
+    </modules>
+    <!-- 引用maven仓库源 -->
+    <url>https://maven.apache.org</url>
+    <!-- 这里集中定义整个项目里边所有第三方依赖的版本及其他可作用于所有pom的常量 -->
+    <properties>
+        <project.build.sourceencoding>UTF-8</project.build.sourceencoding>
+        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+    </properties>
+
+    <!-- spring boot-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+    </parent>
+
+    <!--公共依赖-->
+    <dependencies>
+        <!--JUNIT-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>2.0.4.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <!--服务注册中心-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+    </dependencies>
+
+    <!-- spring-cloud所有项目依赖包  -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-cloud.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 公共插件-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
