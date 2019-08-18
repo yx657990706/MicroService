@@ -17,13 +17,15 @@ import org.springframework.context.annotation.Configuration;
 public class GatewayRoutesConfig {
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
+        //“/get”请求都转发到“http://httpbin.org/get”。在route配置上，添加了一个filter，该filter会将请求添加一个header,key为hello，value为world
         return builder.routes()
                 .route(r ->
-                        r.path("/java/**")
-                                .filters(
-                                        f -> f.stripPrefix(1)
-                                )
-                                .uri("http://localhost:8090/helloWorld")
+                                r.path("/get")
+                                        .filters(
+                                                f -> f.addRequestHeader("Hello", "World")
+                                        )
+//                                .uri("http://localhost:8090/helloWorld")
+                                        .uri("http://httpbin.org:80")
                 )
                 .build();
     }

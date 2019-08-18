@@ -45,7 +45,7 @@ public class HelloController {
 
     @RequestMapping(value = "/getbook1", method = RequestMethod.GET)
     public Book book1() {
-        return new Book("三国演义", 90, "罗贯中", "花城出版社");
+        return new Book("三国演义", "罗贯中", "花城出版社",90);
     }
 
     @RequestMapping(value = "/getbook2", method = RequestMethod.POST)
