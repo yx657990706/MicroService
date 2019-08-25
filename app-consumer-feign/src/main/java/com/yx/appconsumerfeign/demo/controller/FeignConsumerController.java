@@ -1,7 +1,7 @@
 package com.yx.appconsumerfeign.demo.controller;
 
 import com.yx.appconsumerfeign.demo.service.HelloService;
-import com.yx.commonsmodel.myModel.Book;
+import com.yx.appcoreservicer.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,7 +56,7 @@ public class FeignConsumerController {
 
     @RequestMapping(value = "/hello2")
     public Book hello2() throws UnsupportedEncodingException {
-        Book book = helloService.hello(URLEncoder.encode("三国演义","UTF-8"), URLEncoder.encode("罗贯中","UTF-8"), 33);
+        Book book = helloService.hello(URLEncoder.encode("三国演义","UTF-8"), URLEncoder.encode("罗贯中","UTF-8"),33);
         System.out.println(book);
         return book;
     }

@@ -1,7 +1,7 @@
 package com.yx.appconsumer.demo.controller;
 
 import com.yx.appconsumer.demo.service.HelloService;
-import com.yx.commonsmodel.myModel.Book;
+import com.yx.appcoreservicer.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

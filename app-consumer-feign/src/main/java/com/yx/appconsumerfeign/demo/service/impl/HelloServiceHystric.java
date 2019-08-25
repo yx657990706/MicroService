@@ -1,7 +1,7 @@
 package com.yx.appconsumerfeign.demo.service.impl;
 
 import com.yx.appconsumerfeign.demo.service.HelloService;
-import com.yx.commonsmodel.myModel.Book;
+import com.yx.appcoreservicer.model.Book;
 import org.springframework.stereotype.Component;
 
 /**
