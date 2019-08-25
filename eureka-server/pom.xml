@@ -32,6 +32,33 @@
             <!--<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
         <!--</dependency>-->
     </dependencies>
-
+    <build>
+        <plugins>
+            <!--docker 插件-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.12</version>
+                <!--绑定插件到maven的install命令-->
+                <!--<executions>-->
+                <!--<execution>-->
+                <!--<id>build-image</id>-->
+                <!--<phase>install</phase>-->
+                <!--<goals>-->
+                <!--<goal>build</goal>-->
+                <!--&lt;!&ndash;<goal>push</goal>&ndash;&gt;-->
+                <!--</goals>-->
+                <!--</execution>-->
+                <!--</executions>-->
+                <configuration>
+                    <!--指定Dockerfile所在路径，默认和pom同一级别-->
+                    <!--<dockerInfoDirectory>${project.basedir}/src/main/docker</dockerInfoDirectory>-->
+                    <!--要生成的docker镜像的名称-->
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

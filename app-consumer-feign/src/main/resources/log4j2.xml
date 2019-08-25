@@ -8,7 +8,7 @@
 
         <!-- 文件日志 -->
         <!--log4j2的取系统变量方式是${sys:user.dir}格式，与log4j有区别，注意！！！！-->
-        <RollingFile name="mylog" fileName="${sys:user.dir}/logs/app_mybase.log"  filePattern="${sys:user.dir}/logs/app_mybase_%d{yyyyMMdd}-%i.log.gz">
+        <RollingFile name="mylog" fileName="${sys:user.dir}/logs/app-consumer-feign.log"  filePattern="${sys:user.dir}/logs/app-consumer-feign_%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %t %class{36} %L %M --%msg%xEx%n"/>
             <Policies>
                 <OnStartupTriggeringPolicy />
@@ -16,7 +16,7 @@
                 <TimeBasedTriggeringPolicy />
             </Policies>
         </RollingFile>
-        <RollingFile name="myerrorlog" fileName="${sys:user.dir}/logs/app_mybase_error.log"  filePattern="${sys:user.dir}/logs/app_mybase_%d{yyyyMMdd}-%i_error.log.gz">
+        <RollingFile name="myerrorlog" fileName="${sys:user.dir}/logs/app-consumer-feign_error.log"  filePattern="${sys:user.dir}/logs/app-consumer-feign_%d{yyyyMMdd}-%i_error.log.gz">
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %t %class{36} %L %M --%msg%xEx%n"/>
             <Policies>
