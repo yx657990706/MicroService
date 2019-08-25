@@ -16,7 +16,7 @@
     <modules>
         <module>eureka-server</module>
         <module>config-server</module>
-        <module>commons-model</module>
+        <module>app-core-servicer</module>
         <module>app-provider</module>
         <module>app-consumer</module>
         <module>app-consumer-feign</module>

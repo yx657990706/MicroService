@@ -35,7 +35,7 @@
         <!--添加对公共模块的依赖-->
         <dependency>
             <groupId>com.yx</groupId>
-            <artifactId>commons-model</artifactId>
+            <artifactId>app-core-servicer</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

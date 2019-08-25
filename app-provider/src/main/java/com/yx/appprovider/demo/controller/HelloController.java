@@ -1,6 +1,6 @@
 package com.yx.appprovider.demo.controller;
 
-import com.yx.commonsmodel.myModel.Book;
+import com.yx.appcoreservicer.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -45,7 +45,7 @@ public class HelloController {
 
     @RequestMapping(value = "/getbook1", method = RequestMethod.GET)
     public Book book1() {
-        return new Book("三国演义", "罗贯中", "花城出版社",90);
+        return new Book("三国演义", 90,"罗贯中", "花城出版社");
     }
 
     @RequestMapping(value = "/getbook2", method = RequestMethod.POST)
