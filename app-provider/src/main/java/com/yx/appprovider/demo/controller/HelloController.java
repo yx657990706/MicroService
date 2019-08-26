@@ -35,7 +35,6 @@ public class HelloController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String index() throws Exception {
-//        Thread.sleep(7*1000);
         List<ServiceInstance> instances = client.getInstances("app-provider");
         for (int i = 0; i < instances.size(); i++) {
             logger.info("/hello,host:" + instances.get(i).getHost() + ",service_id:" + instances.get(i).getServiceId());
