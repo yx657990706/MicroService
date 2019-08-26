@@ -1,6 +1,6 @@
 package com.yx.appprovider.demo.controller;
 
-import com.yx.appcoreservicer.model.Book;
+import com.yx.appcore.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;

@@ -1,7 +1,7 @@
 package com.yx.appconsumerfeign.demo.service;
 
 import com.yx.appconsumerfeign.demo.service.impl.HelloServiceHystric;
-import com.yx.appcoreservicer.model.Book;
+import com.yx.appcore.model.Book;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.yx.appconsumerfeign.demo.controller;
 
 import com.yx.appconsumerfeign.demo.service.HelloService;
-import com.yx.appcoreservicer.model.Book;
+import com.yx.appcore.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

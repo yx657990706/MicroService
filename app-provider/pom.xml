@@ -50,13 +50,17 @@
         <!--添加对公共木块的依赖-->
         <dependency>
             <groupId>com.yx</groupId>
-            <artifactId>app-core-servicer</artifactId>
+            <artifactId>app-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <!--docker 插件-->
             <plugin>
                 <groupId>com.spotify</groupId>
