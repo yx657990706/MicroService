@@ -27,3 +27,12 @@ API网关，提供熔断、降级、路由等功能，是所有业务模块的�
 ### 注意事项
 - 1、进行docker编译前，保证docker已经运行登录
 - 2、mvn clean install dockerfile:build -DskipTests=true设置maven编译
+
+### 问题及处理方式
+- 1.spring-boot-maven-plugin打包出来的jar是不可依赖的
+
+方式1：https://blog.csdn.net/guduyishuai/article/details/60968728
+
+
+方式2：移除parent的pom中的spring-boot-maven-plugin插件，移除被依赖的jar中的spring-boot-maven-plugin插件，
+即不使用spring-boot-maven-plugin打包可避免该问题。其余模块自己添加spring-boot-maven-plugin即可
