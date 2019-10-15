@@ -1,6 +1,7 @@
 package com.yx.basereportservice.amqp;
 
 import com.yx.basereportservice.enums.MsgEnum;
+import com.yx.basereportservice.model.BaseReport;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.amqp.AmqpException;
@@ -24,9 +25,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @Component
 public class Producer implements MessagePostProcessor {
-
-    @Value("${report.project}")
-    private String project;
 
     @Value("${report.pool-size:2}")
     private int poolSize;
@@ -137,7 +135,6 @@ public class Producer implements MessagePostProcessor {
     private void packMessage(MsgEnum msgType, BaseReport msgBody) throws IllegalAccessException {
         int eventId = msgType.value();
         msgBody.set("event", eventId);
-        msgBody.set("project", project);
 
         // 时间戳参数不能为空
         if (null == msgBody.get("timestamp")) {

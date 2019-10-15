@@ -1,4 +1,4 @@
-package com.yx.basereportservice.amqp;
+package com.yx.basereportservice.model;
 
 import com.yx.basereportservice.enums.PlatformEnum;
 import com.yx.basereportservice.enums.UserTypeEnum;
@@ -13,6 +13,8 @@ import java.util.Map;
 
 
 public class BaseReport implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * msg
@@ -39,7 +41,7 @@ public class BaseReport implements Serializable {
      * @param date
      */
     public void setIndexShard(Date date) {
-        String shard = DateFormatUtils.format(date, "yyyy.MM.dd");
+        String shard = DateFormatUtils.format(date, "yyyyMMdd");
         this.msg.put("index", shard);
     }
 
@@ -164,8 +166,6 @@ public class BaseReport implements Serializable {
     public void setRegMonths(Long months) {
         this.msg.put("regMonths", months);
     }
-
-    private static final long serialVersionUID = 1L;
 
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
