@@ -1,6 +1,8 @@
 package com.yx.basereportservice.amqp;
 
+import com.yx.basereportservice.enums.MsgEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageDeliveryMode;
@@ -11,10 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.UUID;
+import java.lang.reflect.Field;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -109,69 +109,69 @@ public class Producer implements MessagePostProcessor {
         return new LinkedBlockingDeque<>();
     }
 
-//    /**
-//     * report 消息发送MQ
-//     *
-//     * @param msgType Event type
-//     * @param msgBody Event data
-//     */
-//    public void report(MsgEnum msgType, BaseReport msgBody) {
-//        try {
-//            this.packMessage(msgType, msgBody);
-//            log.info("发送消息:msg:{}", msgBody.getMsg());
-//            this.rabbitTemplate.convertAndSend(this.exchange, this.routeKey, msgBody.getMsg());
-//        } catch (AmqpException e) {
-//            this.events.add(new Event(msgBody.getMsg()));
-//        } catch (Exception e) {
-//            log.warn("report msg failed,retry:{}", e);
-//        }
-//    }
+    /**
+     * report 消息发送MQ
+     *
+     * @param msgType Event type
+     * @param msgBody Event data
+     */
+    public void report(MsgEnum msgType, BaseReport msgBody) {
+        try {
+            this.packMessage(msgType, msgBody);
+            log.info("发送消息:msg:{}", msgBody.getMsg());
+            this.rabbitTemplate.convertAndSend(this.exchange, this.routeKey, msgBody.getMsg());
+        } catch (AmqpException e) {
+            this.events.add(new Event(msgBody.getMsg()));
+        } catch (Exception e) {
+            log.warn("report msg failed,retry:{}", e);
+        }
+    }
 
-//    /**
-//     * 消息封装
-//     *
-//     * @param msgType Event type
-//     * @param msgBody Event data
-//     * @throws IllegalAccessException exception
-//     */
-//    private void packMessage(MsgEnum msgType, BaseReport msgBody) throws IllegalAccessException {
-//        int eventId = msgType.value();
-//        msgBody.set("event", eventId);
-//        msgBody.set("project", project);
-//
-//        // 时间戳参数不能为空
-//        if (null == msgBody.get("timestamp")) {
-//            msgBody.set("timestamp", new Date());
-//        }
-//        // index shard
-//        if (null == msgBody.get("index")) {
-//            Date ts = (Date) msgBody.get("timestamp");
-//            msgBody.set("index", DateFormatUtils.format(ts, "yyyy.MM.dd"));
-//        }
-//        // document id
-//        // 执行更新增量更新时作为主键
-//        if (null == msgBody.get("uuid")) {
-//            msgBody.set("uuid", UUID.randomUUID().toString().replace("-",""));
-//        }
-//        // 事件参数
-//        Class clazz = msgBody.getClass();
-//        Field[] fields = clazz.getDeclaredFields();
-//        if (fields.length == 0) {
-//            return;
-//        }
-//        String dataKey = String.valueOf(eventId);
-//        Map<String, Object> data = new HashMap<>();
-//        for (Field field : fields) {
-//            field.setAccessible(true);
-//            String fieldKey = field.getName();
-//            Object fieldValue = field.get(msgBody);
-//            if (null == fieldValue) {
-//                continue;
-//            }
-//            data.put(fieldKey, fieldValue);
-//        }
-//        msgBody.set(dataKey, data);
-//    }
+    /**
+     * 消息封装
+     *
+     * @param msgType Event type
+     * @param msgBody Event data
+     * @throws IllegalAccessException exception
+     */
+    private void packMessage(MsgEnum msgType, BaseReport msgBody) throws IllegalAccessException {
+        int eventId = msgType.value();
+        msgBody.set("event", eventId);
+        msgBody.set("project", project);
+
+        // 时间戳参数不能为空
+        if (null == msgBody.get("timestamp")) {
+            msgBody.set("timestamp", new Date());
+        }
+        // index shard
+        if (null == msgBody.get("index")) {
+            Date ts = (Date) msgBody.get("timestamp");
+            msgBody.set("index", DateFormatUtils.format(ts, "yyyy.MM.dd"));
+        }
+        // document id
+        // 执行更新增量更新时作为主键
+        if (null == msgBody.get("uuid")) {
+            msgBody.set("uuid", UUID.randomUUID().toString().replace("-",""));
+        }
+        // 事件参数
+        Class clazz = msgBody.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        if (fields.length == 0) {
+            return;
+        }
+        String dataKey = String.valueOf(eventId);
+        Map<String, Object> data = new HashMap<>();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            String fieldKey = field.getName();
+            Object fieldValue = field.get(msgBody);
+            if (null == fieldValue) {
+                continue;
+            }
+            data.put(fieldKey, fieldValue);
+        }
+        msgBody.set(dataKey, data);
+    }
 
 
     @Override
