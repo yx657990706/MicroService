@@ -47,6 +47,8 @@ public class QueueConsumer {
             if (dealBizQueueService != null) {
                 dealBizQueueService.process(queueMessge);
             }
+            channel.basicAck(tag, false);
+            log.info("QueueConsumer消息处理完成:{}", queueMessge);
         } catch (Throwable e) {
             boolean reQueue = true;
             try {
