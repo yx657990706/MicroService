@@ -1,7 +1,7 @@
 package com.yx.basecoreservice.exception;
 
 
-import com.yx.appcore.enums.EnumBusinessErrorCode;
+import com.yx.basecoreservice.enums.EnumBusinessErrorCode;
 
 /**
  * @author jesse
@@ -22,26 +22,26 @@ public class MyWebPreConditions {
 
     public static void assertTrue(final boolean expression, final String code, final String errorMessage) {
         if (!expression) {
-            throw new MyException(code, errorMessage);
+            throw new ServiceException(code, errorMessage);
         }
     }
 
     public static void assertTrue(final boolean expression, EnumBusinessErrorCode enumBusinessErrorCode) {
         if (!expression) {
-            throw new MyException(enumBusinessErrorCode.getErrorCode(), enumBusinessErrorCode.getErrorMsg());
+            throw new ServiceException(enumBusinessErrorCode.getErrorCode(), enumBusinessErrorCode.getErrorMsg());
         }
     }
 
     public static <T> T checkNotNull(final T reference, String code, final String errorMessage) {
         if (reference == null) {
-            throw new MyException(code, errorMessage);
+            throw new ServiceException(code, errorMessage);
         }
         return reference;
     }
 
     public static <T> T checkNotNull(final T reference, EnumBusinessErrorCode enumBusinessErrorCode) {
         if (reference == null) {
-            throw new MyException(enumBusinessErrorCode.getErrorCode(), enumBusinessErrorCode.getErrorMsg());
+            throw new ServiceException(enumBusinessErrorCode.getErrorCode(), enumBusinessErrorCode.getErrorMsg());
         }
         return reference;
     }

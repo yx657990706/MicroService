@@ -1,6 +1,7 @@
 package com.yx.basecoreservice.utils;
 
-import com.yx.appcore.model.MyResponse;
+
+import com.yx.basecoreservice.model.MyResponse;
 
 /**
  * 统一消息返回工具类

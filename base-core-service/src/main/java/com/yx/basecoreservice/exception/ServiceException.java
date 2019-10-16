@@ -4,7 +4,7 @@ import com.yx.basecoreservice.exception.enums.EnumExceptionResult;
 import lombok.Data;
 
 @Data
-public class MyException extends RuntimeException {
+public class ServiceException extends RuntimeException {
 
 	/**
 	 * 代码
@@ -22,7 +22,7 @@ public class MyException extends RuntimeException {
 	 * @param code
 	 * @param msg
 	 */
-	public MyException(String code, String msg) {
+	public ServiceException(String code, String msg) {
 		super(msg);
 		this.code = code;
 	}
@@ -30,7 +30,7 @@ public class MyException extends RuntimeException {
 	 * 构造方法二(传入枚举)
 	 * @param resltEnum
 	 */
-	public MyException(EnumExceptionResult resltEnum) {
+	public ServiceException(EnumExceptionResult resltEnum) {
 		super(resltEnum.getMsg());
 		this.code = resltEnum.getCode();
 	}

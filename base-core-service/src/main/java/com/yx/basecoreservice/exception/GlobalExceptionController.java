@@ -1,8 +1,8 @@
 package com.yx.basecoreservice.exception;
 
 import com.yx.basecoreservice.exception.enums.EnumExceptionResult;
-import com.yx.appcore.model.MyResponse;
-import com.yx.appcore.utils.ResponseUtil;
+import com.yx.basecoreservice.model.MyResponse;
+import com.yx.basecoreservice.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,10 +29,10 @@ public class GlobalExceptionController {
     @ExceptionHandler(value=Exception.class)
     @ResponseBody
     public MyResponse handle(Exception e) {
-        if(e instanceof MyException) {
-            MyException myException = (MyException) e;
-            log.error("自定义异常 {}:{}",myException.getCode(),e.getMessage(),e);
-            return ResponseUtil.error(myException.getCode(),myException.getMessage());
+        if(e instanceof ServiceException) {
+            ServiceException serviceException = (ServiceException) e;
+            log.error("自定义异常 {}:{}", serviceException.getCode(),e.getMessage(),e);
+            return ResponseUtil.error(serviceException.getCode(), serviceException.getMessage());
         }else {
             //日志记录异常信息,便于排查问题
             log.error("系统异常 {}:{}", EnumExceptionResult.ERROR_UNKOWN.getCode(),e.getMessage(),e);
