@@ -20,6 +20,12 @@
     </properties>
 
     <dependencies>
+        <!-- 基础模块-->
+        <dependency>
+            <groupId>com.yx</groupId>
+            <artifactId>base-core-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -46,6 +52,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <!--分布式任务xxl-job-->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>2.1.0</version>
         </dependency>
     </dependencies>
 
