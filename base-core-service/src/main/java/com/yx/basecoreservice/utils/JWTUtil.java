@@ -1,6 +1,6 @@
 package com.yx.basecoreservice.utils;
 
-import com.yx.appcore.enums.EnumResponseCode;
+import com.yx.basecoreservice.enums.EnumResponseCode;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

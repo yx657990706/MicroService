@@ -14,7 +14,7 @@
 
     <!-- 被聚合的子模块索引 -->
     <modules>
-        <module>eureka-server</module>
+        <!--<module>eureka-server</module>-->
         <!--<module>config-server</module>-->
         <!--<module>app-core</module>-->
         <!--<module>app-provider</module>-->
@@ -56,9 +56,15 @@
             <scope>test</scope>
         </dependency>
         <!--服务注册中心-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
+        <!--</dependency>-->
+        <!--Nacos服务注册及发现-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>0.9.0.RELEASE</version>
         </dependency>
     </dependencies>
 
