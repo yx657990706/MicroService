@@ -11,13 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Map;
 
 @Slf4j
 @Service
-public class GameHistoryServiceImpl implements GameHistoryProxyService {
+public class GameHistoryProxyServiceImpl implements GameHistoryProxyService {
 
     @Autowired
     private Map<String, GameHistoryService> gameHistoryHandlerMap;
