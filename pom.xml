@@ -54,11 +54,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>2.1.7.RELEASE</version>
             <scope>test</scope>
+            <exclusions>
+                <!-- 排除自带的logback日志框架-->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--服务注册中心-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>-->
         <!--</dependency>-->
         <!--Nacos服务注册及发现-->
         <dependency>
