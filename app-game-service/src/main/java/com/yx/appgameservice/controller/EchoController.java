@@ -17,8 +17,16 @@ public class EchoController {
     @Value("${uuu}")
     private String str;
 
+    @Value("${mysqlURL}")
+    private String mysqlURL;
+
     @RequestMapping(value = "/echo/{string}", method = RequestMethod.GET)
     public String echo(@PathVariable String string) {
         return "Hello Nacos Discovery " + string+str;
+    }
+
+    @RequestMapping(value = "/echo2", method = RequestMethod.GET)
+    public String echo2() {
+        return "Hello Nacos config " + mysqlURL;
     }
 }
