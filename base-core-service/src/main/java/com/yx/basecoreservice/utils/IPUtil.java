@@ -19,9 +19,10 @@ public class IPUtil {
      */
     public final static String getIpAddress(HttpServletRequest request){
 
-        String ip = request.getHeader("X-Forwarded-For");
+        String ip = request.getHeader("X-Real-IP");
         try {
             if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("X-Forwarded-For");
                 if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
                     ip = request.getHeader("Proxy-Client-IP");
                 }
