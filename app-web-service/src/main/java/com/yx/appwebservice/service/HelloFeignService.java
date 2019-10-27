@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 使用feign调用RPC服务
+ * //configuration = xxx.class  这个类配置Hystrix的一些精确属性,例如服务超时
+ * //value=“你用到的服务名称”
  */
 @FeignClient(value = "app-game-service",fallback= HelloFeignServiceHystric.class)//@FeignClient注解来指定服务名进而绑定服务
 @Service

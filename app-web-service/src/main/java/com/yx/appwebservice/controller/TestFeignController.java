@@ -10,12 +10,12 @@ public class TestFeignController {
     @Autowired
     HelloFeignService helloFeignService;
 
-    @RequestMapping("/hello")
+    @RequestMapping("/testHello")
     public String hello() {
         return helloFeignService.hello();
     }
 
-    @RequestMapping("/hello1/a")
+    @RequestMapping("/testHello1/a")
     public String hello1() {
         return "hello1/a -----";
     }

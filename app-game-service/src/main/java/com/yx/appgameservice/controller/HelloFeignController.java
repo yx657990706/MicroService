@@ -25,7 +25,7 @@ public class HelloFeignController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String index() throws Exception {
-        List<ServiceInstance> instances = client.getInstances("app-provider");
+        List<ServiceInstance> instances = client.getInstances("app-game-service");
         for (int i = 0; i < instances.size(); i++) {
             log.info("/hello,host:" + instances.get(i).getHost() + ",service_id:" + instances.get(i).getServiceId());
         }
