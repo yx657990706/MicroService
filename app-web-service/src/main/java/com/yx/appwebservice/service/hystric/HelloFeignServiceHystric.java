@@ -20,4 +20,16 @@ public class HelloFeignServiceHystric implements HelloFeignService {
         return "sorry，unable service 2";
     }
 
+    /**
+     * 多参数需要指定映射的属性
+     *
+     * @param name
+     * @param password
+     * @return
+     */
+    @Override
+    public String hello2(String name, String password) {
+        return "sorry，unable service 3";
+    }
+
 }

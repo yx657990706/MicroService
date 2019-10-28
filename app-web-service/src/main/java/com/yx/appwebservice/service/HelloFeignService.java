@@ -3,6 +3,7 @@ package com.yx.appwebservice.service;
 import com.yx.appwebservice.service.hystric.HelloFeignServiceHystric;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,5 +26,15 @@ public interface HelloFeignService {
 
     @RequestMapping(value = "/hello1", method = RequestMethod.GET)
     String hello(@RequestParam("name") String name);
+
+    /**
+     * 多参数需要指定映射的属性
+     * @param name
+     * @param password
+     * @return
+     */
+//    @RequestMapping(value = "/hello1", method = RequestMethod.GET)
+    @GetMapping(value = "/hello2")
+    String hello2(@RequestParam("name") String name,@RequestParam("password") String password);
 
 }
