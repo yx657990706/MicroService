@@ -35,18 +35,18 @@ import java.util.HashMap;
 @Component
 public class QueueConsumer {
 
-    @RabbitListener(queues = "${report.event-queue}")
+    @RabbitListener(queues = "${report.queue}")
     @RabbitHandler
     public void dealBiz(QueueMessge queueMessge, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
         try {
             log.info("===>>消费:::{}", JSON.toJSONString(queueMessge));
             final HashMap<String, Object> content = queueMessge.getContent();
             final Object o = content.get(QueueMessgeConst.BEAN_NAME_KEY);
-            final Object bean = SpringUtils.getBean(o.toString());
-            DealBizQueueService dealBizQueueService = (DealBizQueueService) bean;
-            if (dealBizQueueService != null) {
-                dealBizQueueService.process(queueMessge);
-            }
+//            final Object bean = SpringUtils.getBean(o.toString());
+////            DealBizQueueService dealBizQueueService = (DealBizQueueService) bean;
+////            if (dealBizQueueService != null) {
+////                dealBizQueueService.process(queueMessge);
+////            }
             channel.basicAck(tag, false);
             log.info("QueueConsumer消息处理完成:{}", queueMessge);
         } catch (Throwable e) {
