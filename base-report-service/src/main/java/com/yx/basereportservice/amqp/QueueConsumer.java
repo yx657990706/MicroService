@@ -35,6 +35,7 @@ import java.util.HashMap;
 @Component
 public class QueueConsumer {
 
+
     @RabbitListener(queues = "${report.queue}")
     @RabbitHandler
     public void dealBiz(QueueMessge queueMessge, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
