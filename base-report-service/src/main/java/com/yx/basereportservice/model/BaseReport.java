@@ -167,7 +167,7 @@ public class BaseReport implements Serializable {
         this.msg.put("regMonths", months);
     }
 
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+//    public String toString() {
+//        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+//    }
 }

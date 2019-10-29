@@ -1,6 +1,5 @@
 package com.yx.basereportservice.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.yx.basereportservice.amqp.Producer;
 import com.yx.basereportservice.amqp.QueueMessageSender;
 import com.yx.basereportservice.constant.QueueMessgeConst;
@@ -9,6 +8,7 @@ import com.yx.basereportservice.enums.PlatformEnum;
 import com.yx.basereportservice.enums.UserTypeEnum;
 import com.yx.basereportservice.model.BaseReport;
 import com.yx.basereportservice.model.QueueMessge;
+import com.yx.basereportservice.model.TestReport;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,28 +44,29 @@ public class ProduceController {
     @GetMapping(value = "/addMQData")
     public String addTestData(){
 
-        BaseReport baseReport = new BaseReport();
-        baseReport.setPlatform(PlatformEnum.IOS);
-        baseReport.setUid(1003);
-        baseReport.setUuid("yx123456sdfgh");
-        baseReport.setTimestamp(new Date());
-        baseReport.setUserName("rrr");
-        baseReport.setDeviceId("PC端");
-        baseReport.setIp("123.23.0.1");
-        baseReport.setFinishTime(new Date());
-        baseReport.setDomain("werr");
-        baseReport.setIsFake("1");
-        baseReport.setParentId(23);
-        baseReport.setParentName("qqq");
-        baseReport.setRegDays(30L);
-        baseReport.setRegMonths(1l);
-        baseReport.setRegTime(new Date());
-        baseReport.setRegWeeks(4l);
-        baseReport.setUserType(UserTypeEnum.MEMBER);
+        TestReport testReport = new TestReport();
+        testReport.setUid(1003);
+        testReport.setIp("123.23.0.1");
+        testReport.setPlatform(PlatformEnum.IOS);
+        testReport.setUuid("yx123456sdfgh");
+        testReport.setTimestamp(new Date());
+        testReport.setUserName("rrr");
+        testReport.setDeviceId("PC端");
+        testReport.setFinishTime(new Date());
+        testReport.setDomain("werr");
+        testReport.setIsFake("1");
+        testReport.setParentId(23);
+        testReport.setParentName("qqq");
+        testReport.setRegDays(30L);
+        testReport.setRegMonths(1l);
+        testReport.setRegTime(new Date());
+        testReport.setRegWeeks(4l);
+        testReport.setUserType(UserTypeEnum.MEMBER);
+        testReport.setName("你哈");
 
         log.info("===>>上报时间：{}",System.currentTimeMillis());
 
-        producer.report(MsgEnum.Recharge,baseReport);
+        producer.report(MsgEnum.Recharge,testReport);
 
         return "ok";
     }

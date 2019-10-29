@@ -115,8 +115,8 @@ public class Producer implements MessagePostProcessor {
      */
     public void report(MsgEnum msgType, BaseReport msgBody) {
         try {
-            this.packMessage(msgType, msgBody);
             log.info("发送消息:msg:{}", msgBody.getMsg());
+            this.packMessage(msgType, msgBody);
             this.rabbitTemplate.convertAndSend(this.exchange, this.routeKey, msgBody.getMsg());
         } catch (AmqpException e) {
             this.events.add(new Event(msgBody.getMsg()));

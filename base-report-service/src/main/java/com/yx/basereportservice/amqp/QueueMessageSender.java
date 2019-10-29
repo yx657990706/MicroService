@@ -78,7 +78,7 @@ public class QueueMessageSender {
     public boolean convertAndDelaySend(String queueKey, QueueMessge msg, int delay) {
         final int xdelay = delay * 1000;
         try {
-            String exchange = "dead-letter-exchange";
+            String exchange = "xdelay-letter-exchange";
             if (delay == 0) {//30
                 exchange = exchange + "0sec";
             } else if (delay <= 30) {//30
@@ -94,7 +94,6 @@ public class QueueMessageSender {
             } else if (delay <= 3600) {//3600
                 exchange = exchange + "3600sec";
             }
-
             rabbitTemplate.convertAndSend(exchange, queueKey, msg, new MessagePostProcessor() {
 
                 @Override

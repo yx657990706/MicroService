@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 @Slf4j
 @Component
-@RabbitListener(queues = "${report.event-queue}", containerFactory = "ReportListenerContainerFactory", admin = "ReportRabbitAdmin")
+@RabbitListener(queues = "${report.queue}", containerFactory = "ReportListenerContainerFactory", admin = "ReportRabbitAdmin")
 public class Consumer {
 
     private final ApplicationContext applicationContext;
