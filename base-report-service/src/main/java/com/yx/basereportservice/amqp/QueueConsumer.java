@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author jesse
@@ -35,24 +36,27 @@ import java.util.HashMap;
 @Component
 public class QueueConsumer {
 
+    private static AtomicInteger ai = new AtomicInteger(1);
+
     @RabbitListener(queues = "${report.queue}")
     @RabbitHandler
     public void dealBiz(QueueMessge queueMessge, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
         try {
             log.info("===>>消费:::{}", JSON.toJSONString(queueMessge));
-            final HashMap<String, Object> content = queueMessge.getContent();
-            final Object o = content.get(QueueMessgeConst.BEAN_NAME_KEY);
+//            final HashMap<String, Object> content = queueMessge.getContent();
+//            final Object o = content.get(QueueMessgeConst.BEAN_NAME_KEY);
 //            final Object bean = SpringUtils.getBean(o.toString());
-////            DealBizQueueService dealBizQueueService = (DealBizQueueService) bean;
-////            if (dealBizQueueService != null) {
-////                dealBizQueueService.process(queueMessge);
-////            }
+//            DealBizQueueService dealBizQueueService = (DealBizQueueService) bean;
+//           if (dealBizQueueService != null) {
+//                dealBizQueueService.process(queueMessge);
+//            }
             channel.basicAck(tag, false);
+
             log.info("QueueConsumer消息处理完成:{}", queueMessge);
         } catch (Throwable e) {
-            boolean reQueue = true;
             try {
-                channel.basicReject(tag, reQueue);//reject后进入死信队列
+                //false表示拒绝后不再进入队列，此时若绑定了死信队列，则进入死信队列
+                channel.basicReject(tag, false);
             } catch (IOException ex) {
                 log.error("report event reject error", ex);
             }
