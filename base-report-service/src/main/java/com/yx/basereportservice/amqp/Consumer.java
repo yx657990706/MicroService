@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 @Slf4j
-@Component
-@RabbitListener(queues = "${report.queue}", containerFactory = "ReportListenerContainerFactory", admin = "ReportRabbitAdmin")
+//@Component
+//@RabbitListener(queues = "${report.queue}", containerFactory = "ReportListenerContainerFactory", admin = "ReportRabbitAdmin")
 public class Consumer {
 
     private final ApplicationContext applicationContext;
@@ -29,7 +29,7 @@ public class Consumer {
         this.applicationContext = applicationContext;
     }
 
-    @RabbitHandler
+//    @RabbitHandler
     public void process(HashMap<String, Object> data, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
         try {
             log.info("evlog接收到消息:{}", data);

@@ -79,6 +79,7 @@ public class QueueMessageSender {
         final int xdelay = delay * 1000;
         try {
             String exchange = "xdelay-letter-exchange";
+            //按时间区间分割，避免延迟时间长的排到前面，导致队列后面的数据超时
             if (delay == 0) {//30
                 exchange = exchange + "0sec";
             } else if (delay <= 30) {//30
@@ -101,6 +102,7 @@ public class QueueMessageSender {
                         throws AmqpException {
                     //设置延时时间
                     message.getMessageProperties().setDelay(xdelay);
+                    //设置TTL过期时间
                     message.getMessageProperties().setExpiration(String.valueOf(xdelay));
                     //设置消息持久化
                     message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
