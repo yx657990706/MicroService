@@ -119,7 +119,7 @@ public class RabbitConnectionConfig implements RabbitTemplate.ConfirmCallback, R
      */
     @Override
     public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-        log.warn("ReturnCallback:{},{},{},{},{},{}", message, replyCode, replyText, exchange, routingKey);
+        log.warn("ReturnCallback:{},{},{},{},{}", message, replyCode, replyText, exchange, routingKey);
     }
 }
 

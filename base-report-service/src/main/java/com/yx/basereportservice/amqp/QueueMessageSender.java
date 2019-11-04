@@ -34,23 +34,6 @@ public class QueueMessageSender {
     private RabbitTemplate rabbitTemplate;
 
     /**
-     * 发送队列消息到默认的exchange
-     *
-     * @param queueKey
-     * @param msg
-     * @return
-     */
-    public boolean convertAndSend(String queueKey, QueueMessge msg) {
-        try {
-            rabbitTemplate.convertAndSend(queueKey, msg);
-            return true;
-        } catch (Exception e) {
-            log.error("===>>MQ异常", e);
-            return false;
-        }
-    }
-
-    /**
      * 发送队列消息到指定的exchange
      *
      * @param queueKey
