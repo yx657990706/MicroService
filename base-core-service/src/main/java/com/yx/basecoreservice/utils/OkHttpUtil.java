@@ -50,8 +50,8 @@ public class OkHttpUtil {
         FormBody.Builder builder = new FormBody.Builder();
         //添加参数
         if (params != null && params.keySet().size() > 0) {
-            for (String key : params.keySet()) {
-                builder.add(key, params.get(key));
+            for (Map.Entry<String,String> entry:params.entrySet()){
+                builder.add(entry.getKey(), entry.getValue());
             }
         }
         Request request = new Request.Builder()
