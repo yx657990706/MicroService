@@ -367,7 +367,7 @@ public class RSAUtils {
         System.out.println("priveteKey:" + priveteKey);
 
         String orignStr = "1234qwer!@#$%^&*)(撒的是啊（）&……%¥#@！";
-        byte[] data = RSAUtils.encryptByPublicKey(orignStr.getBytes(), publickey, RSAUtils.KEY_ALGORITHM);
+        byte[] data = RSAUtils.encryptByPublicKey(orignStr.getBytes("UTF-8"), publickey, RSAUtils.KEY_ALGORITHM);
         System.out.println("加密后：" + new String(Base64.encodeBase64(data), "UTF-8"));
         System.out.println("解密后：" + new String(RSAUtils.decryptByPrivateKey(data, priveteKey, RSAUtils.KEY_ALGORITHM), "UTF-8"));
 

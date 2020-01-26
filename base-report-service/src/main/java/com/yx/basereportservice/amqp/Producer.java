@@ -88,17 +88,17 @@ public class Producer implements MessagePostProcessor {
         }));
     }
 
-    /**
-     * finalize
-     */
-    protected void finalize() {
-        if (null != this.senderPool) {
-            this.senderPool.shutdown();
-            this.senderPool = null;
-        }
-        log.info("finalize");
-        this.retryTimer.cancel();
-    }
+//    /**
+//     * finalize
+//     */
+//    protected void finalize() {
+//        if (null != this.senderPool) {
+//            this.senderPool.shutdown();
+//            this.senderPool = null;
+//        }
+//        log.info("finalize");
+//        this.retryTimer.cancel();
+//    }
 
     /**
      * create event queue

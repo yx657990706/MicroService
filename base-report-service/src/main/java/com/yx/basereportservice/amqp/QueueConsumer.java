@@ -36,8 +36,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class QueueConsumer {
 
-    private static AtomicInteger ai = new AtomicInteger(1);
-
     @RabbitListener(queues = "${report.queue}")
     @RabbitHandler
     public void dealBiz(QueueMessge queueMessge, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
@@ -51,7 +49,6 @@ public class QueueConsumer {
 //                dealBizQueueService.process(queueMessge);
 //            }
             channel.basicAck(tag, false);
-
             log.info("QueueConsumer消息处理完成:{}", queueMessge);
         } catch (Throwable e) {
             try {

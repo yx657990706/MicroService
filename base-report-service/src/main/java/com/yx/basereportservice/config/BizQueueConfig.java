@@ -8,6 +8,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,14 +23,17 @@ public class BizQueueConfig {
     @Value("${report.queue}")
     private String queue;
 
-//    @Value("${report.event-queue}")
-//    private String eventQueue;
+    @Value("${report.event-queue}")
+    private String eventQueue;
 
     @Value("${report.exchange}")
     private String exchange;
 
     @Value("${report.routekey}")
     private String routeKey;
+
+    @Value("${report.event-routekey}")
+    private String eventRouteKey;
 
     @Value("${report.dead-queue}")
     private String deadQueue;
@@ -53,15 +57,15 @@ public class BizQueueConfig {
         return new Queue(this.queue, true, false, false, args);
     }
 
-//    /**
-//     * 第二个持久化队列
-//     * @return
-//     */
-//    @Bean
-//    public Queue reportEventQueue() {
-//        log.info("create queue:{}", this.eventQueue);
-//        return new Queue(this.eventQueue, true, false, false);
-//    }
+    /**
+     * 第二个持久化队列
+     * @return
+     */
+    @Bean
+    public Queue reportEventQueue() {
+        log.info("create queue:{}", this.eventQueue);
+        return new Queue(this.eventQueue, true, false, false);
+    }
 
     /**
      *  主exchange
@@ -83,15 +87,15 @@ public class BizQueueConfig {
         return BindingBuilder.bind(reportQueue()).to(reportExchange()).with(this.routeKey);
     }
 
-//    /**
-//     *  绑定event队列和主交换机（绑定同一个交换机dirct模式，同1份数据发到2个队列中）
-//     * @return
-//     */
-//    @Bean
-//    public Binding reportEventBinding() {
-//        log.info("create binding:{}", this.routeKey);
-//        return BindingBuilder.bind(reportEventQueue()).to(reportExchange()).with(this.routeKey);
-//    }
+    /**
+     *  绑定event队列和主交换机
+     * @return
+     */
+    @Bean
+    public Binding reportEventBinding() {
+        log.info("create binding:{}", this.eventRouteKey);
+        return BindingBuilder.bind(reportEventQueue()).to(reportExchange()).with(this.eventRouteKey);
+    }
 
     /**
      * 死信队列

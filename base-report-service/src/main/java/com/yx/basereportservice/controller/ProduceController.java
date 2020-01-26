@@ -6,7 +6,6 @@ import com.yx.basereportservice.constant.QueueMessgeConst;
 import com.yx.basereportservice.enums.MsgEnum;
 import com.yx.basereportservice.enums.PlatformEnum;
 import com.yx.basereportservice.enums.UserTypeEnum;
-import com.yx.basereportservice.model.BaseReport;
 import com.yx.basereportservice.model.QueueMessge;
 import com.yx.basereportservice.model.TestReport;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +36,7 @@ public class ProduceController {
         queueMessge.put(QueueMessgeConst.BIZ_JSON_STRING_KEY, bank);
 
         //发送消息到rabbitMQ队列
-        final boolean b = sender.convertAndSend("yx-report-queue", queueMessge);
+        final boolean b = sender.convertAndSend("yx-report-exchange","yx-report-routekey", queueMessge);
         log.info("队列推送结果===>>{}", b);
         return "ok";
     }
