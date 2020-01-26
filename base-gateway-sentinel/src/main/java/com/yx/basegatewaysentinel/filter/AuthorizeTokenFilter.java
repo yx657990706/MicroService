@@ -68,9 +68,11 @@ public class AuthorizeTokenFilter implements GlobalFilter {
     }
 
     private boolean checkSkip(final String requestPath) {
+        //完全匹配
         if (SIGN_EXCLUDE.contains(requestPath)) {
             return true;
         }
+        //路径匹配
         for (String excludePath : SIGN_EXCLUDE) {
             if (PATH_MATCHER.match(excludePath, requestPath)) {
                 return true;
