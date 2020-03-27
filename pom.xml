@@ -33,7 +33,7 @@
     <!-- 这里集中定义整个项目里边所有第三方依赖的版本及其他可作用于所有pom的常量 -->
     <properties>
         <project.build.sourceencoding>UTF-8</project.build.sourceencoding>
-        <spring-cloud.version>Greenwich.SR3</spring-cloud.version>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
         <!--docker镜像的前缀“jesse”-->
         <docker.image.prefix>jesse</docker.image.prefix>
     </properties>
@@ -42,7 +42,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.7.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -52,7 +52,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.1.7.RELEASE</version>
+            <version>2.2.6.RELEASE</version>
             <scope>test</scope>
             <exclusions>
                 <!-- 排除自带的logback日志框架-->
